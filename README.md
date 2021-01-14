@@ -72,6 +72,7 @@ module "example" {
 | ecs\_task\_iam\_role | aws\_iam\_role resource for the ECS task |
 | iam\_role\_ecs\_service | aws\_iam\_role resource for the ECS service |
 | lb\_target\_group | aws\_lb\_target\_group resource |
+| security\_group\_id | Resource ID of Security Group |
 | task\_definition | aws\_ecs\_task\_definition resource |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
