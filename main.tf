@@ -94,7 +94,7 @@ resource "aws_lb_listener" "this" {
 ########################################
 module "container_definition" {
   source  = "cloudposse/ecs-container-definition/aws"
-  version = "0.25.0"
+  version = "0.58.1"
 
   environment       = var.environment_variables
   container_cpu     = var.task_cpu
@@ -107,7 +107,7 @@ module "container_definition" {
 }
 
 resource "aws_ecs_task_definition" "this" {
-  container_definitions    = module.container_definition.json
+  container_definitions    = module.container_definition.json_map_encoded_list
   cpu                      = var.task_cpu
   execution_role_arn       = aws_iam_role.ecs_exec.arn
   family                   = var.name
