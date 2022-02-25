@@ -157,6 +157,12 @@ variable "vpc_id" {
   type        = string
 }
 
+variable "stickiness" {
+  description = "Stickiness session enabled."
+  type        = bool
+  default     = null
+}
+
 ########################################
 # Data
 ########################################

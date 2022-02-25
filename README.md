@@ -85,6 +85,7 @@ module "example" {
 | <a name="input_network_mode"></a> [network\_mode](#input\_network\_mode) | The Docker networking mode to use for the containers in the task. The valid values are none, bridge, awsvpc, and host. | `string` | `"awsvpc"` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | The secrets to pass to the container. This is a list of maps | <pre>list(object({<br>    name      = string<br>    valueFrom = string<br>  }))</pre> | `null` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | List of Security Group IDs to apply to the ECS Service | `list(string)` | `[]` | no |
+| <a name="input_stickiness"></a> [stickiness](#input\_stickiness) | Enable stickiness configuration in Target Group | `bool` | null | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | Subnets that should be added to ECS service network configuration | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Resource Tags. BE VERBOSE. Should AT MINIMIUM contain; Name & Owner | `map(string)` | `{}` | no |
 | <a name="input_target_group_port"></a> [target\_group\_port](#input\_target\_group\_port) | The port on which targets receive traffic on the Target Group | `number` | `80` | no |

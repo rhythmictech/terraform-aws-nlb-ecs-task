@@ -67,9 +67,12 @@ resource "aws_lb_target_group" "this" {
     unhealthy_threshold = var.health_check.unhealthy_threshold
   }
 
-  stickiness {
-    enabled = false
-    type    = "lb_cookie"
+  dynamic "stickiness" {
+    for_each = var.stickiness != null ? [var.stickiness] : []
+    content {
+      enabled = lookup(stickiness.value, "enabled", false)
+      type    = lookup(stickiness.value, "type", "lb_cookie")
+    }
   }
 
   lifecycle {
