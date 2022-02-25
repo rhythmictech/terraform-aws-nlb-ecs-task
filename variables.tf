@@ -159,7 +159,7 @@ variable "vpc_id" {
 
 variable "stickiness" {
   description = "Stickiness session enabled."
-  type        = bool
+  type        = any
   default     = null
 }
 
