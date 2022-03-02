@@ -34,8 +34,8 @@ resource "aws_security_group_rule" "nlb_to_ecs_ingress" {
 ########################################
 
 resource "aws_cloudwatch_log_group" "this" {
-  name_prefix = local.cloudwatch_log_group_name_prefix
-  tags        = var.tags
+  name = "/aws/ecs/${var.name}"
+  tags = var.tags
 }
 
 ########################################
