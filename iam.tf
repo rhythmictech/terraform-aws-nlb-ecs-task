@@ -27,7 +27,7 @@ resource "aws_iam_role_policy_attachment" "additional" {
   count = length(var.additional_ecs_task_policy_arns)
 
   policy_arn = var.additional_ecs_task_policy_arns[count.index]
-  role       = aws_iam_role.ecs_task[0].id
+  role       = try(aws_iam_role.ecs_task[0].id, null)
 }
 
 ########################################
@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "ecs_exec" {
 
 resource "aws_iam_role_policy_attachment" "ecs_exec" {
   count      = var.ecs_execution_role == "" ? 1 : 0
-  role       = aws_iam_role.ecs_exec[0].name
+  role       = try(aws_iam_role.ecs_exec[0].name, null)
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 
@@ -63,5 +63,5 @@ resource "aws_iam_role_policy_attachment" "ecs_exec_additional" {
   count = length(var.additional_ecs_service_exec_policy_arns)
 
   policy_arn = var.additional_ecs_service_exec_policy_arns[count.index]
-  role       = aws_iam_role.ecs_exec[0].id
+  role       = try(aws_iam_role.ecs_exec[0].id, null)
 }
