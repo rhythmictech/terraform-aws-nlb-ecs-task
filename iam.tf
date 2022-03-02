@@ -36,7 +36,7 @@ resource "aws_iam_role_policy_attachment" "additional" {
 #   https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
 ########################################
 resource "aws_iam_role" "ecs_exec" {
-  count              = var.ecs_execution_role != "" ? 1 : 0
+  count              = var.ecs_execution_role == "" ? 1 : 0
   name_prefix        = local.ecs_exec_iam_role_name_prefix
   assume_role_policy = data.aws_iam_policy_document.ecs_exec.json
   tags               = var.tags
@@ -54,7 +54,7 @@ data "aws_iam_policy_document" "ecs_exec" {
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_exec" {
-  count      = var.ecs_execution_role != "" ? 1 : 0
+  count      = var.ecs_execution_role == "" ? 1 : 0
   role       = aws_iam_role.ecs_exec[0].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
