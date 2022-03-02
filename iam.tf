@@ -17,7 +17,7 @@ data "aws_iam_policy_document" "assume" {
 }
 
 resource "aws_iam_role" "ecs_task" {
-  count              = var.ecs_task_role != "" ? 1 : 0
+  count              = var.ecs_task_role == "" ? 1 : 0
   name_prefix        = local.ecs_task_iam_role_name_prefix
   assume_role_policy = data.aws_iam_policy_document.assume.json
   tags               = var.tags
