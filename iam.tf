@@ -27,7 +27,8 @@ resource "aws_iam_role_policy_attachment" "additional" {
   count = length(var.additional_ecs_task_policy_arns)
 
   policy_arn = var.additional_ecs_task_policy_arns[count.index]
-  role       = try(aws_iam_role.ecs_task[0].id, null)
+  role       = aws_iam_role.ecs_task[0].id
+  depends_on = [aws_iam_role.ecs_task]
 }
 
 ########################################
