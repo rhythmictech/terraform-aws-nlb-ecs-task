@@ -158,9 +158,21 @@ variable "vpc_id" {
 }
 
 variable "stickiness" {
+  default     = null
   description = "Stickiness session enabled."
   type        = any
-  default     = null
+}
+
+variable "ecs_task_role" {
+  default     = ""
+  description = "ECS task execution role. If specified none will be created"
+  type        = string
+}
+
+variable "ecs_execution_role" {
+  default     = ""
+  description = "ECS execution role. If specified none will be created"
+  type        = string
 }
 
 ########################################

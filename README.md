@@ -32,7 +32,7 @@ module "example" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.48.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.3.0 |
 
 ## Modules
 
@@ -74,6 +74,8 @@ module "example" {
 | <a name="input_container_image"></a> [container\_image](#input\_container\_image) | Container image, ie 203583890406.dkr.ecr.us-west-1.amazonaws.com/api-integrations:git-34752db | `string` | `"busybox"` | no |
 | <a name="input_container_name"></a> [container\_name](#input\_container\_name) | Defaults to `api-<var.name>` | `string` | `null` | no |
 | <a name="input_container_port"></a> [container\_port](#input\_container\_port) | Port on Container that main process is listening on | `number` | n/a | yes |
+| <a name="input_ecs_execution_role"></a> [ecs\_execution\_role](#input\_ecs\_execution\_role) | ECS execution role. If specified none will be created | `string` | `""` | no |
+| <a name="input_ecs_task_role"></a> [ecs\_task\_role](#input\_ecs\_task\_role) | ECS task execution role. If specified none will be created | `string` | `""` | no |
 | <a name="input_environment_variables"></a> [environment\_variables](#input\_environment\_variables) | The environment variables to pass to the container. This is a list of maps | <pre>list(object({<br>    name  = string<br>    value = string<br>  }))</pre> | `null` | no |
 | <a name="input_health_check"></a> [health\_check](#input\_health\_check) | Target group health check, for LB to assess service health | <pre>object({<br>    port                = string<br>    protocol            = string<br>    healthy_threshold   = number<br>    unhealthy_threshold = number<br>    interval            = number<br>  })</pre> | <pre>{<br>  "healthy_threshold": 3,<br>  "interval": 30,<br>  "port": "traffic-port",<br>  "protocol": "HTTP",<br>  "unhealthy_threshold": 3<br>}</pre> | no |
 | <a name="input_internal_protocol"></a> [internal\_protocol](#input\_internal\_protocol) | Protocol for traffic between the ALB and ECS. Should be one of [TCP, TLS, UDP, TCP\_UDP] | `string` | `"TCP"` | no |
@@ -84,7 +86,7 @@ module "example" {
 | <a name="input_network_mode"></a> [network\_mode](#input\_network\_mode) | The Docker networking mode to use for the containers in the task. The valid values are none, bridge, awsvpc, and host. | `string` | `"awsvpc"` | no |
 | <a name="input_secrets"></a> [secrets](#input\_secrets) | The secrets to pass to the container. This is a list of maps | <pre>list(object({<br>    name      = string<br>    valueFrom = string<br>  }))</pre> | `null` | no |
 | <a name="input_security_group_ids"></a> [security\_group\_ids](#input\_security\_group\_ids) | List of Security Group IDs to apply to the ECS Service | `list(string)` | `[]` | no |
-| <a name="input_stickiness"></a> [stickiness](#input\_stickiness) | Enable stickiness configuration in Target Group | `bool` | null | no |
+| <a name="input_stickiness"></a> [stickiness](#input\_stickiness) | Stickiness session enabled. | `any` | `null` | no |
 | <a name="input_subnets"></a> [subnets](#input\_subnets) | Subnets that should be added to ECS service network configuration | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Resource Tags. BE VERBOSE. Should AT MINIMIUM contain; Name & Owner | `map(string)` | `{}` | no |
 | <a name="input_target_group_port"></a> [target\_group\_port](#input\_target\_group\_port) | The port on which targets receive traffic on the Target Group | `number` | `80` | no |
