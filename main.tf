@@ -112,7 +112,6 @@ module "container_definition" {
 resource "aws_ecs_task_definition" "this" {
   container_definitions    = module.container_definition.json_map_encoded_list
   cpu                      = var.task_cpu
-  enable_execute_command   = true
   execution_role_arn       = try(aws_iam_role.ecs_exec[0].arn, var.ecs_execution_role)
   family                   = var.name
   memory                   = var.task_memory
@@ -127,11 +126,12 @@ resource "aws_ecs_task_definition" "this" {
 }
 
 resource "aws_ecs_service" "this" {
-  cluster         = var.cluster_name
-  desired_count   = var.task_desired_count
-  launch_type     = var.launch_type
-  name            = var.name
-  task_definition = aws_ecs_task_definition.this.arn
+  cluster                = var.cluster_name
+  desired_count          = var.task_desired_count
+  enable_execute_command = true
+  launch_type            = var.launch_type
+  name                   = var.name
+  task_definition        = aws_ecs_task_definition.this.arn
 
   load_balancer {
     container_name   = local.container_name
