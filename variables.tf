@@ -116,6 +116,12 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
+variable "service_registry_arn" {
+  default     = null
+  description = "ARN of aws_service_discovery_service"
+  type        = string
+}
+
 variable "subnets" {
   default     = []
   description = "Subnets that should be added to ECS service network configuration"
