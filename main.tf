@@ -33,6 +33,7 @@ resource "aws_security_group_rule" "nlb_to_ecs_ingress" {
 # Logs
 ########################################
 
+#tfsec:ignore:aws-cloudwatch-log-group-customer-key
 resource "aws_cloudwatch_log_group" "this" {
   name = "/aws/ecs/${var.name}"
   tags = var.tags
@@ -150,5 +151,14 @@ resource "aws_ecs_service" "this" {
     assign_public_ip = var.assign_ecs_service_public_ip
     security_groups  = compact(concat(var.security_group_ids, [aws_security_group.ecs_service.id]))
     subnets          = var.subnets
+  }
+
+  dynamic "service_registries" {
+    for_each = var.service_registry_arn == null ? [] : [1]
+    content {
+      registry_arn   = var.service_registry_arn
+      container_name = local.container_name
+      container_port = var.container_port
+    }
   }
 }
