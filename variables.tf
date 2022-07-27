@@ -104,7 +104,7 @@ variable "network_mode" {
 variable "volumes" {
   default     = null
   description = "The Volume to attach ecs container. This is a list of maps"
-  type = list(object({
+  type = set(object({
     name = string
   }))
 }
