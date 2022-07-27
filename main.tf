@@ -121,6 +121,12 @@ resource "aws_ecs_task_definition" "this" {
   tags                     = var.tags
   task_role_arn            = try(aws_iam_role.ecs_task[0].arn, var.ecs_task_role)
 
+  dynamic "volume" {
+    for_each = var.volumes
+    content {
+      name = volume.value.name
+    }
+  }
   lifecycle {
     ignore_changes = [container_definitions]
   }
