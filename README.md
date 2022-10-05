@@ -94,7 +94,7 @@ module "example" {
 | <a name="input_task_cpu"></a> [task\_cpu](#input\_task\_cpu) | The number of cpu units used by the task. | `number` | `1024` | no |
 | <a name="input_task_desired_count"></a> [task\_desired\_count](#input\_task\_desired\_count) | Number of copies of task definition that should be running at any given time | `number` | `1` | no |
 | <a name="input_task_memory"></a> [task\_memory](#input\_task\_memory) | The amount (in MiB) of memory used by the task. | `number` | `2048` | no |
-| <a name="input_volumes"></a> [volumes](#input\_volumes) | The Volume to attach ecs container. This is a list of maps | <pre>set(object({<br>    name = string<br>  }))</pre> | `null` | no |
+| <a name="input_volumes"></a> [volumes](#input\_volumes) | The Volume to attach ecs container. This is a list of maps | <pre>set(object({<br>    name = string<br>  }))</pre> | `[]` | no |
 | <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | VPC ID where resources will be created | `string` | n/a | yes |
 
 ## Outputs
